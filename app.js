@@ -1,0 +1,11 @@
+const $=s=>document.querySelector(s);const $$=s=>document.querySelectorAll(s);
+$$('.nav').forEach(b=>b.onclick=()=>{$$('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.tab').forEach(x=>x.classList.remove('active'));$('#'+b.dataset.tab).classList.add('active');$('#pageTitle').textContent=b.dataset.tab==='dashboard'?'Create a recap':b.textContent.replace(/^[^A-Za-z]+/,'').trim()});
+$('#file').onchange=e=>$('#fileName').textContent=e.target.files[0]?e.target.files[0].name:'No file selected';
+const demo=`တစ်ညမှာ အဓိကဇာတ်ကောင်ဟာ သူ့ဘဝကို အပြီးအပိုင်ပြောင်းလဲသွားစေမယ့် လျှို့ဝှက်ချက်တစ်ခုကို မတော်တဆတွေ့ရှိသွားပါတယ်။ အစပိုင်းမှာ ဘာဖြစ်နေတာလဲဆိုတာ သူကိုယ်တိုင်တောင် မသိပါဘူး။ ဒါပေမယ့် သဲလွန်စတွေကို တစ်ခုချင်းလိုက်ကြည့်ရင်း အရင်က ယုံကြည်ခဲ့တဲ့လူတွေထဲက တစ်ယောက်ဟာ အားလုံးရဲ့နောက်ကွယ်မှာ ရှိနေကြောင်း သိလာပါတယ်။\n\nအခြေအနေက ပိုပြီးအန္တရာယ်များလာတဲ့အခါ သူဟာ ထွက်ပြေးမယ့်အစား အမှန်တရားကို ရင်ဆိုင်ဖို့ ဆုံးဖြတ်လိုက်ပါတယ်။ နောက်ဆုံးမှာတော့ သူတွေ့ရှိခဲ့တဲ့အရာက သူထင်ထားတာထက် ပိုကြီးမားနေခဲ့ပါတယ်။`;
+$('#generate').onclick=()=>{ $('#status').textContent='Generating…'; setTimeout(()=>{$('#script').value=demo;$('#status').textContent='Generated';},650)};
+$('#translate').onclick=()=>{$('#script').value=demo;$('#status').textContent='Burmese version ready'};
+$('#voiceBtn').onclick=()=>{$('#status').textContent='Voice queued';alert('Prototype: connect your Burmese TTS provider in the backend to generate an audio file.')};
+$('#play').onclick=()=>alert('Prototype voice preview — connect a Burmese TTS API for real audio.');
+$('#render').onclick=()=>$('#renderMsg').textContent='Preview render queued. Connect FFmpeg/render worker for real MP4 export.';
+$('#exportScript').onclick=()=>{const blob=new Blob([$('#script').value||''],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='recap-script.txt';a.click();URL.revokeObjectURL(a.href)};
+$$('.format').forEach(b=>b.onclick=()=>{$$('.format').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
